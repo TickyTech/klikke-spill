@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <script>
+    var myInterval;
+    var butikkmulti = 1.3;
+    var autostart = true;
+    var verdi = 0;
+    var multa = 1;
+    var lvl1 = 0;
+    var lvl2 = 0;
+    var lvl3 = 0;
+    var lvl4 = 0;
+    var lvl5 = 0;
+    var lvl6 = 0;
+    var lvl7 = 0;
+    var lvl8 = 0;
+    var lvl9 = 0;
+    var buy1 = 10;
+    var buy2 = 100;
+    var buy3 = 1500;
+    var buy4 = 150000;
+    var buy5 = 3000000;
+    var buy6 = 50000000;
+    var buy7 = 400000000;
+    var buy8 = 1200000000;
+    var buy9 = 5000000000;
+
+    function multin(addd) {
+      nokpeng();
+      var testttt = parseInt(
+        document.getElementById("coin").getAttribute("value")
+      );
+      var levels = parseInt(addd.getAttribute("value"));
+      if (levels == 1) {
+        if (testttt >= buy1) {
+          testttt -= buy1;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/adrian.mp3");
+          audio.play();
+          buy1 = Math.ceil(buy1 * butikkmulti);
+          document.getElementById("b1").innerHTML = buy1 + "$";
+          lvl1++;
+          document.getElementById("l1").innerHTML = "lvl " + lvl1;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 5) {
+        if (testttt >= buy2) {
+          testttt -= buy2;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/penge.mp3");
+          audio.play();
+          buy2 = Math.ceil(buy2 * butikkmulti);
+          document.getElementById("b2").innerHTML = buy2 + "$";
+          lvl2++;
+          document.getElementById("l2").innerHTML = "lvl " + lvl2;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 10) {
+        if (testttt >= buy3) {
+          testttt -= buy3;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/magi.m4a");
+          audio.play();
+          buy3 = Math.ceil(buy3 * butikkmulti);
+          document.getElementById("b3").innerHTML = buy3 + "$";
+          lvl3++;
+          document.getElementById("l3").innerHTML = "lvl " + lvl3;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 20) {
+        if (testttt >= buy4) {
+          testttt -= buy4;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/jamal.mp3");
+          audio.play();
+          buy4 = Math.ceil(buy4 * butikkmulti);
+          document.getElementById("b4").innerHTML = buy4 + "$";
+          lvl4++;
+          document.getElementById("l4").innerHTML = "lvl " + lvl4;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 50) {
+        if (testttt >= buy5) {
+          testttt -= buy5;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/penge.mp3");
+          audio.play();
+          buy5 = Math.ceil(buy5 * butikkmulti);
+          document.getElementById("b5").innerHTML = buy5 + "$";
+          lvl5++;
+          document.getElementById("l5").innerHTML = "lvl " + lvl5;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 100) {
+        if (testttt >= buy6) {
+          testttt -= buy6;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/penge.mp3");
+          audio.play();
+          buy6 = Math.ceil(buy6 * butikkmulti);
+          document.getElementById("b6").innerHTML = buy6 + "$";
+          lvl6++;
+          document.getElementById("l6").innerHTML = "lvl " + lvl6;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 250) {
+        if (testttt >= buy7) {
+          testttt -= buy7;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/penge.mp3");
+          audio.play();
+          buy7 = Math.ceil(buy7 * butikkmulti);
+          document.getElementById("b7").innerHTML = buy7 + "$";
+          lvl7++;
+          document.getElementById("l7").innerHTML = "lvl " + lvl7;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 500) {
+        if (testttt >= buy8) {
+          testttt -= buy8;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/penge.mp3");
+          audio.play();
+          buy8 = Math.ceil(buy8 * butikkmulti);
+          document.getElementById("b8").innerHTML = buy8 + "$";
+          lvl8++;
+          document.getElementById("l8").innerHTML = "lvl " + lvl8;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      } else if (levels == 1000) {
+        if (testttt >= buy9) {
+          testttt -= buy9;
+          document.getElementById("coin").setAttribute("value", testttt);
+          document.getElementById("sums").innerHTML = testttt;
+          nokpeng();
+          var audio = new Audio("sounds/ni66apowa.mp3");
+          audio.play();
+          buy9 = Math.ceil(buy9 * butikkmulti);
+          document.getElementById("b9").innerHTML = buy9 + "$";
+          lvl9++;
+          document.getElementById("l9").innerHTML = "lvl " + lvl9;
+          multa += parseInt(addd.getAttribute("value"));
+          document.getElementById("clickpersec").innerHTML =
+            multa + " coins/click";
+        }
+      }
+    }
+
+    function autoclick() {
+      var audio = new Audio("sounds/flick.mp3");
+      audio.play();
+      if (autostart) {
+        myInterval = setInterval(clik, 1000);
+        autostart = false;
+        document.getElementById("autoclickid").style.backgroundColor =
+          "rgb(91, 202, 51)";
+        document.getElementById("autoclickiddiv").style.top = "0";
+      } else if (!autostart) {
+        clearInterval(myInterval);
+        autostart = true;
+        document.getElementById("autoclickid").style.backgroundColor =
+          "rgb(202, 51, 51)";
+        document.getElementById("autoclickiddiv").style.top = "50%";
+      }
+    }
+
+    function clik() {
+      var testt = parseInt(
+        document.getElementById("coin").getAttribute("value")
+      );
+      testt += multa;
+      document.getElementById("coin").setAttribute("value", testt);
+      document.getElementById("sums").innerHTML = testt;
+      console.log(testt);
+      nokpeng();
+    }
+
+    function infipeng() {
+      var testt = 999999999999;
+      testt += multa;
+      document.getElementById("coin").setAttribute("value", testt);
+      document.getElementById("sums").innerHTML = testt;
+      console.log(testt);
+      nokpeng();
+    }
+
+    function nokpeng() {
+      var testtt = parseInt(
+        document.getElementById("coin").getAttribute("value")
+      );
+      if (buy1 > testtt) {
+        document.getElementById("buybg1").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg1").style.backgroundColor = "#54da00";
+      }
+      if (buy2 > testtt) {
+        document.getElementById("buybg2").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg2").style.backgroundColor = "#54da00";
+      }
+      if (buy3 > testtt) {
+        document.getElementById("buybg3").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg3").style.backgroundColor = "#54da00";
+      }
+      if (buy4 > testtt) {
+        document.getElementById("buybg4").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg4").style.backgroundColor = "#54da00";
+      }
+      if (buy5 > testtt) {
+        document.getElementById("buybg5").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg5").style.backgroundColor = "#54da00";
+      }
+      if (buy6 > testtt) {
+        document.getElementById("buybg6").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg6").style.backgroundColor = "#54da00";
+      }
+      if (buy7 > testtt) {
+        document.getElementById("buybg7").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg7").style.backgroundColor = "#54da00";
+      }
+      if (buy8 > testtt) {
+        document.getElementById("buybg8").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg8").style.backgroundColor = "#54da00";
+      }
+      if (buy9 > testtt) {
+        document.getElementById("buybg9").style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById("buybg9").style.backgroundColor = "#54da00";
+      }
+    }
+  </script>
+
+  <body>
+    <nav>
+      <div id="nav-icons">
+        <a href="user">
+          <ion-icon name="person-circle" class="stats-icon"></ion-icon>
+        </a>
+
+        <a href="leaderboard.html">
+          <ion-icon name="stats-chart" class="stats-icon"></ion-icon>
+        </a>
+
+        <a>
+          <ion-icon name="cash-outline" class="stats-icon" onclick="infipeng()" style="cursor: pointer;"></ion-icon>
+        </a>
+      </div>
+      <div onclick="autoclick()" id="autoclickid">
+        <div id="autoclickiddiv"></div>
+      </div>
+    </nav>
+    <div id="click-space">
+      <div id="sum">
+        <div id="sums">0</div>
+      </div>
+      <div id="coin" value="0" onclick="clik(this)"></div>
+    </div>
+    <div id="upgrades">
+      <div id="upgrade-text">
+        <h2>Oppgraderinger</h2>
+      </div>
+      <p id="clickpersec">1 coins/click</p>
+      <div id="upgrades-upgrades">
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/tim.png" alt="tim" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Tim<span class="show-lvl" id="l1">lvl 0</span></p>
+            <p>+1 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="1"
+            onclick="multin(this)"
+            id="buybg1"
+          >
+            Buy<span class="show-lvl" id="b1">10$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/printer.png" alt="printer" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Printer<span class="show-lvl" id="l2">lvl 0</span></p>
+            <p>+5 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="5"
+            onclick="multin(this)"
+            id="buybg2"
+          >
+            Buy<span class="show-lvl" id="b2">100$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/magi.png" alt="magi" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Magi<span class="show-lvl" id="l3">lvl 0</span></p>
+            <p>+10 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="10"
+            onclick="multin(this)"
+            id="buybg3"
+          >
+            Buy<span class="show-lvl" id="b3">1,500$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/jamal.png" alt="jamal" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Jamal<span class="show-lvl" id="l4">lvl 0</span></p>
+            <p>+20 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="20"
+            onclick="multin(this)"
+            id="buybg4"
+          >
+            Buy<span class="show-lvl" id="b4">150,000$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/ball.png" alt="ball" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Gumball<span class="show-lvl" id="l5">lvl 0</span></p>
+            <p>+50 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="50"
+            onclick="multin(this)"
+            id="buybg5"
+          >
+            Buy<span class="show-lvl" id="b5">3M$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/atm.png" alt="atm" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>ATM<span class="show-lvl" id="l6">lvl 0</span></p>
+            <p>+100 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="100"
+            onclick="multin(this)"
+            id="buybg6"
+          >
+            Buy<span class="show-lvl" id="b6">50M$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/bank.png" alt="bank" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Bank<span class="show-lvl" id="l7">lvl 0</span></p>
+            <p>+250 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="250"
+            onclick="multin(this)"
+            id="buybg7"
+          >
+            Buy<span class="show-lvl" id="b7">400M$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/mine.png" alt="mine" style="width: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Mine<span class="show-lvl" id="l8">lvl 0</span></p>
+            <p>+500 Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="500"
+            onclick="multin(this)"
+            id="buybg8"
+          >
+            Buy<span class="show-lvl" id="b8">1.2B$</span>
+          </div>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-item-icon">
+            <img src="icons/jamal2nd.png" alt="tim" style="height: 70px" />
+          </div>
+          <div class="upgrade-item-amount">
+            <p>Jamal II<span class="show-lvl" id="l9">lvl 0</span></p>
+            <p>+1k Tap</p>
+          </div>
+          <div
+            class="upgrade-item-price"
+            value="1000"
+            onclick="multin(this)"
+            id="buybg9"
+          >
+            Buy<span class="show-lvl" id="b9">5B$</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+
+</html>

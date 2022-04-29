@@ -1,0 +1,206 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    background-image: url(backgrounds/bg1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+::-webkit-scrollbar {
+    width: 0.75em;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(84, 45, 30);
+    border-radius: 100vw;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(94, 51, 20);
+    border: none;
+  }
+  nav {
+    background-color: #343a40;
+    color: #fff;
+    height: 100vh;
+    width:85px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  #nav-icons{
+    margin-top: 10px;
+    display: flex;
+    align-items: center; 
+    flex-direction: column; 
+  }
+  .stats {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+  }
+
+  .stats-icon {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    fill: white;
+    color: white;
+    margin-bottom: 35px;
+  }
+#click-space{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    font-size: 50px;
+    width: 67%;
+}
+#sum{
+    background-image: url(backgrounds/sign.png);
+    width: 350px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#sums{
+    margin-bottom: 8px;
+    color: rgba(238, 230, 221, 0.932);
+}
+
+@keyframes coin {
+    0% {margin-bottom: 0px;}
+    50% {margin-bottom: 10px;}
+    100% {margin-bottom: 0px;}
+  }
+
+#coin{
+    height: 200px;
+    width: 200px;
+    background-image: url(icons/coin.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    user-select: none;
+    clip-path: polygon(69% 0%, 69.32% 6%, 81.39% 5.94%, 81.46% 19.02%, 86.73% 18.97%, 86.72% 30.84%, 94% 62px, 94% 68.5%, 87.09% 68.44%, 87.11% 80.9%, 81.39% 80.7%, 81.62% 93.05%, 68.96% 93.22%, 69.00% 99.50%, 31.32% 100%, 31.32% 93%, 37px 93.5%, 18.38% 87.55%, 12.44% 87.53%, 12.34% 74.06%, 6.7% 74.08%, 6.39% 24.56%, 12.36% 24.56%, 12.31% 12.06%, 18.61% 11.92%, 18.79% 6.09%, 31.17% 5.87%, 31.24% 0.02%);
+    animation: coin 3s infinite;
+}
+#upgrades{
+    height: 90vh;
+    width:700px;
+    margin-block: 1.5vh;
+    background-image: url(backgrounds/rbanner.png), url(backgrounds/lbanner.png);
+    background-position: right, left;
+    background-size: contain;
+    background-repeat: no-repeat, no-repeat;
+    padding: 20px;
+    color:rgba(238, 230, 221, 0.932);
+}
+#upgrade-text{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgba(238, 230, 221, 0.932);
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+#upgrades-upgrades{
+    height: 76%;
+    width: 100%;
+    overflow-y: scroll;
+}
+.upgrade-item{
+    margin-block: 9px;
+    margin-inline: auto;
+    height: 80px;
+    width: 97%;
+    display: flex;
+    background-color: rgb(122, 81, 64);
+    justify-content: space-between;
+    align-items: center;
+}
+.upgrade-item-icon{
+    height: 70px;
+    width: 70px;
+    margin-left: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.upgrade-item-amount{
+    height: 70px;
+    width: 70%;
+    font-size: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.upgrade-item-amount p{
+    margin-inline: 10px;
+    position: relative;
+}
+.upgrade-item-price{
+    padding: .2rem 0rem;
+    text-align: center;
+    width: 100px;
+    background-color:  #da0000;
+    box-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    border-radius: 9px;
+    color: #fff;
+    margin-right: 7px;
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+    transition: .1s;
+    user-select: none;
+}
+.upgrade-item-price:hover{
+    filter: brightness(85%);
+}
+.show-lvl{
+    font-size: 20px;
+    display: block;
+    margin-left: 5px;
+}
+
+#clickpersec{
+    margin-left: 10px;
+}
+#autoclickid{
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+    background-color: rgb(202, 51, 51);
+    border-radius: 100vw;
+    height: 100px;
+    width: 50px;
+}
+#autoclickiddiv{
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    background-color: rgb(226, 226, 226);
+    border-radius: 100vw;
+    height: 50px;
+    width: 50px;
+}
