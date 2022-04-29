@@ -214,15 +214,6 @@
       nokpeng();
     }
 
-    function infipeng() {
-      var testt = 999999999999;
-      testt += multa;
-      document.getElementById("coin").setAttribute("value", testt);
-      document.getElementById("sums").innerHTML = testt;
-      console.log(testt);
-      nokpeng();
-    }
-
     function nokpeng() {
       var testtt = parseInt(
         document.getElementById("coin").getAttribute("value")
@@ -284,10 +275,6 @@
 
         <a href="leaderboard.html">
           <ion-icon name="stats-chart" class="stats-icon"></ion-icon>
-        </a>
-
-        <a>
-          <ion-icon name="cash-outline" class="stats-icon" onclick="infipeng()" style="cursor: pointer;"></ion-icon>
         </a>
       </div>
       <div onclick="autoclick()" id="autoclickid">
