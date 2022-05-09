@@ -3,7 +3,7 @@
     padding: 0;
     font-family: sans-serif;
 }
-body{
+#maingame{
     background-image: url(backgrounds/bg1.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -136,18 +136,36 @@ body{
     background-repeat: no-repeat;
     cursor: pointer;
     user-select: none;
-    clip-path: polygon(69% 0%, 69.32% 6%, 81.39% 5.94%, 81.46% 19.02%, 86.73% 18.97%, 86.72% 30.84%, 94% 62px, 94% 68.5%, 87.09% 68.44%, 87.11% 80.9%, 81.39% 80.7%, 81.62% 93.05%, 68.96% 93.22%, 69.00% 99.50%, 31.32% 100%, 31.32% 93%, 37px 93.5%, 18.38% 87.55%, 12.44% 87.53%, 12.34% 74.06%, 6.7% 74.08%, 6.39% 24.56%, 12.36% 24.56%, 12.31% 12.06%, 18.61% 11.92%, 18.79% 6.09%, 31.17% 5.87%, 31.24% 0.02%);
+    position: relative;
+    border-radius: 70px;
+    /* clip-path: polygon(69% 0%, 69.32% 6%, 81.39% 5.94%, 81.46% 19.02%, 86.73% 18.97%, 86.72% 30.84%, 94% 62px, 94% 68.5%, 87.09% 68.44%, 87.11% 80.9%, 81.39% 80.7%, 81.62% 93.05%, 68.96% 93.22%, 69.00% 99.50%, 31.32% 100%, 31.32% 93%, 37px 93.5%, 18.38% 87.55%, 12.44% 87.53%, 12.34% 74.06%, 6.7% 74.08%, 6.39% 24.56%, 12.36% 24.56%, 12.31% 12.06%, 18.61% 11.92%, 18.79% 6.09%, 31.17% 5.87%, 31.24% 0.02%); */
     animation: coin 3s infinite;
+    transition: .2s all ease-in-out;
 }
+
+#coin:active{
+    transform: scale(0.9);
+}
+
+.notSelect{
+    user-select: none;
+}
+
+#coin > .number{
+    z-index: 99;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+}
+
 #upgrades{
     height: 90vh;
     width:700px;
-    margin-block: 1.5vh;
-    background-image: url(backgrounds/rbanner.png), url(backgrounds/lbanner.png);
-    background-position: right, left;
+    background-image: url(backgrounds/rbanner.png), url(backgrounds/lbanner.png), url(backgrounds/mbanner.png);
+    background-position: right, left, center;
     background-size: contain;
-    background-repeat: no-repeat, no-repeat;
-    padding: 20px;
+    background-repeat: no-repeat, no-repeat, repeat;
+    padding: 30px;
     color:rgba(238, 230, 221, 0.932);
 }
 #upgrade-text{
@@ -220,27 +238,10 @@ body{
     margin-left: 5px;
 }
 
-#clickpersec{
+#clickpersec, #coinpersec{
     margin-left: 10px;
 }
-#autoclickid{
-    position: absolute;
-    bottom: 10px;
-    cursor: pointer;
-    background-color: rgb(202, 51, 51);
-    border-radius: 100vw;
-    height: 100px;
-    width: 50px;
-}
-#autoclickiddiv{
-    position: absolute;
-    top: 50%;
-    cursor: pointer;
-    background-color: rgb(226, 226, 226);
-    border-radius: 100vw;
-    height: 50px;
-    width: 50px;
-}
+
 
 #designed{
     position: fixed;
@@ -249,4 +250,113 @@ body{
     color: white;
     font-size: 16px;
     text-align: center;
+    z-index: 9999999999;
+}
+#login{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.704);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#login #white{
+    background-color: white;
+    color: black;
+    height: 400px;
+    width:300px;
+    padding: 20px;
+    font-size: 23px;
+    position: relative;
+}
+#login #white h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+#x-login{
+    position: absolute;
+    top:10px;
+    right:15px;
+    cursor: pointer;
+}
+
+.active{
+    display: block;
+}
+
+
+/* 1322px */
+
+/* LEADERBOARD */
+
+#leaderboard {
+    background-image: url(backgrounds/leaderboardbg.jpg);
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    font-family: myFirstFont;
+    display: flex;
+    flex-direction: column;
+}
+
+#leaderboard .center {
+    /* margin-right: auto;
+    margin-left: auto; */
+    /* margin-top: 25vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#leaderboard h1 {
+    text-align: center;
+    font-size: 72px;
+    color: rgb(255, 1, 221);
+    text-shadow: 5px 5px black;
+    margin-bottom: 30px;
+    z-index: 10;
+}
+
+#leaderboard .konteiner {
+    width: 500px;
+    height: 500px;
+    padding: 10px 10px;
+    background-color: black;
+    align-items: center;
+    box-shadow: 10px 10px 15px 10px rgb(255, 1, 221), -5px -10px 15px 10px rgb(0, 224, 253), 5px 30px 100px 10px rgba(0, 0, 0, 0.42), -10px -15px 50px 10px rgb(0, 224, 253), 15px 15px 100px 10px rgb(255, 1, 221);
+    display: grid;
+    grid-template-columns: 80px 1fr 60px 130px;
+    
+}
+
+#leaderboard h3 {
+    font-size: 2rem;
+    margin-right: 20px;
+    color: #fff;
+}
+
+#leaderboard.number {
+    margin-left: 25px;
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(fonts/ARCADECLASSIC.TTF);
+}
+
+#leaderboard span {
+    font-size: 2rem;
+    margin-right: 20px;
+    color: #fff;
+}
+
+#leaderboard .img {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    color: #fff;
 }
