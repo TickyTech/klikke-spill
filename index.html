@@ -8,9 +8,433 @@
   <link rel="stylesheet" href="style.css" />
   <title>Coin Click</title>
 </head>
+<script>
+  var temp;
+  var myInterval;
+  var game = {
+    currentCoins: 0,
+    coinsPerClick: 1,
+    soundCheck: true,
+    autoClickTime: 500,
+    storeMultiplier: 1.1,
+    prestigeCost: 500000000,
+    levelArray: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    cpcUpgradeArray: [0, 1, 5, 10, 50, 250, 1000, 5000, 25000, 100000],
+    priceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
+    prestigeLevelPriceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
+    version: 3.3,
+    prestigeLevel: 0
+  };
+  function saveGame() {
+    localStorage.setItem('gameVar', JSON.stringify(game));
+  }
+  if (JSON.parse(localStorage.getItem('gameVar')) !== null){
+    temp = game
+    game = JSON.parse(localStorage.getItem('gameVar'));
+    if (game.version != temp.version){
+      game = temp;
+    }
+  }
 
-<body style="text-align:center;">
- <h1>Game is currently down due to crashing game when getting far into game.<br>Your savegame will be kept when this downtime is over. <br><br>Estemated downtime is 2 hours</h1>
+  window.onload = oppstart;
+
+  function oppstart() {
+    document.getElementById('versionName').innerHTML= 'V ' + game.version;
+    for (var i = 1; i < 10; i++) {
+      temp = 'b' + (i - 1);
+      document.getElementById(temp).innerHTML = numFormatter(game.priceArray[i - 1], 1) + "$";
+      temp = 'tap' + (i);
+      document.getElementById(temp).innerHTML = "+" + numFormatter(game.cpcUpgradeArray[i]) + " Tap";
+      temp = 'lvl' + (i);
+      document.getElementById(temp).innerHTML = "lvl " + numFormatter(game.levelArray[i]);
+    }
+    temp = 'b' + (i - 1);
+    document.getElementById(temp).innerHTML = numFormatter(game.priceArray[i - 1]) + "$";
+    coinCheck()
+    document.getElementById("clickpersec").innerHTML = numFormatter(game.coinsPerClick, 1) + " coins/click";
+    document.getElementById('prest-p').innerHTML = 'Prestige ' + game.prestigeLevel;
+    document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
+    document.getElementById('bar').getAttribute('max', game.prestigeCost)
+    if (game.levelArray[0] == 1) {
+      document.getElementById("buybg1").style.display = "none";
+      document.getElementById("lvl0").innerHTML = "Purchased";
+      document.getElementById("lvl0").style.textAlign = "center";
+      autoclick()
+    }
+  }
+
+  function coinCheck() {
+    // Endrer farge på Buy knapp for å vise om man har nok penger eller ikke
+    for (var i = 0; i < 10; i++) {
+      temp = 'buybg' + (i + 1);
+      if (game.priceArray[i] > game.currentCoins) {
+        document.getElementById(temp).style.backgroundColor = "#da0000";
+      } else {
+        document.getElementById(temp).style.backgroundColor = "#54da00";
+      }
+    }
+  }
+
+  function numFormatter(num, desimal) {
+    // Formaterer nummer
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(desimal) + 'k'; // convert to k for number from > 1000 < 1 million
+    } else if (num >= 1000000 && num < 1000000000) {
+      return (num / 1000000).toFixed(desimal) + 'M'; // convert to M for number from > 1 million
+    } else if (num >= 1000000000 && num < 1000000000000) {
+      return (num / 1000000000).toFixed(desimal) + 'B'; // convert to M for number from > 1 million
+    } else if (num >= 1000000000000 && num < 1000000000000000) {
+      return (num / 1000000000000).toFixed(desimal) + 'T'; // convert to M for number from > 1 million
+    } else if (num >= 1000000000000000) {
+      return (num / 1000000000000000).toFixed(desimal) + 'Q'; // convert to M for number from > 1 million
+    } else if (num < 999) {
+      return num.toFixed(); // if value < 1000, nothing to do
+    }
+  }
+
+  function lyd_switch_on_or_of() {
+    // Denne funksjonen skal man lime inn for å sjekke om soundCheck er på eller ikke.
+    if (soundCheck) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function lydswitch() {
+    // Lydswitch
+    if (soundCheck) {
+      document.getElementById('volume-icon').name = "volume-mute-outline"
+      soundCheck = false;
+    } else {
+      document.getElementById('volume-icon').name = "volume-high-outline"
+      soundCheck = true
+    }
+  }
+
+  function autoclick() {
+    // Starter og stopper autoklikkeren
+    clearInterval(myInterval);
+    myInterval = setInterval(clik, game.autoClickTime);
+  }
+
+  function clik(event) {
+    // Legger til riktig menge penger i pengene
+    game.currentCoins += game.coinsPerClick;
+    document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
+    prestigeCheck();
+    coinCheck();
+    if (event == !undefined){
+      if(document.getElementById("coin").childElementCount <=30){
+      numberOnClick(event);
+    }}
+    saveGame();
+  }
+
+  function oppgrader(elementpressed) {
+    // Hodterer oppgraderinger
+    var elementPressed = parseInt(elementpressed.getAttribute("name"));
+    if (game.currentCoins >= game.priceArray[elementPressed]) {
+      // Oppdatere coinsPerClick display
+      game.coinsPerClick += game.cpcUpgradeArray[elementPressed];
+      document.getElementById("clickpersec").innerHTML = numFormatter(game.coinsPerClick, 1) + " coins/click";
+      // Oppdatere intern megde per klikk og mengde penger
+      game.currentCoins -= game.priceArray[elementPressed];
+      document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
+      // Oppdatere pris
+      game.priceArray[elementPressed] *= game.storeMultiplier;
+      temp = 'b' + (elementPressed);
+      document.getElementById(temp).innerHTML = numFormatter(game.priceArray[elementPressed], 1) + "$";
+      // Oppdatere levels
+      game.levelArray[elementPressed]++
+      temp = 'lvl' + (elementPressed);
+      document.getElementById(temp).innerHTML = "lvl " + numFormatter(game.levelArray[elementPressed]);
+      // Checks
+      prestigeCheck();
+      coinCheck();
+      if (elementPressed == 0) {
+        document.getElementById("buybg1").style.display = "none";
+        document.getElementById("lvl0").innerHTML = "Purchased";
+        document.getElementById("lvl0").style.textAlign = "center";
+        autoclick();
+      }
+      if (game.autoClickTime > 1) {
+        game.autoClickTime--
+        if (game.levelArray[0] == 1) {
+          autoclick();
+        }
+      }
+    }
+    saveGame();
+  }
+
+  function prestigeCheck() {
+    // Sjekker om man har nok penger til å prestige
+    document.getElementById("bar").setAttribute("value", game.currentCoins);
+    if (game.currentCoins >= game.prestigeCost) {
+      document.getElementById("bar").style.display = "none";
+      document.getElementById("pres_knapp").style.display = "block";
+    } else {
+      document.getElementById("bar").style.display = "block";
+      document.getElementById("pres_knapp").style.display = "none";
+    }
+  }
+
+
+  function prestige() {
+    // Nullstille alle verdier og øke priser og oppgraderinger
+    game.currentCoins = 0;
+    game.coinsPerClick = 1;
+    game.autoClickTime = 500;
+    game.prestigeCost *= 2.5;
+    game.storeMultiplier += 0.34;
+    game.priceArray = game.prestigeLevelPriceArray;
+    game.levelArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (var i = 0; i < 10; i++) {
+      game.cpcUpgradeArray[i] *= 1.25;
+      game.priceArray[i] *= 1.8
+    }
+    game.prestigeLevel++;
+    game.priceArray[0] = 10000;
+    game.prestigeLevelPriceArray = game.priceArray;
+    document.getElementById('bar').setAttribute('value', game.currentCoins);
+    document.getElementById('bar').setAttribute('max', game.prestigeCost);
+    document.getElementById('prest-p').innerHTML = 'Prestige ' + game.prestigeLevel;
+    document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
+    // Resetting auto clicker
+    document.getElementById("buybg1").style.display = "block";
+    document.getElementById("tap0").innerHTML = "";
+    document.getElementById("lvl0").innerHTML = "";
+    document.getElementById("lvl0").style.textAlign = "center";
+    document.getElementById("b0").innerHTML = "10k$";
+    oppstart();
+    clearInterval(myInterval);
+    coinCheck();
+    prestigeCheck();
+    saveGame();
+  }
+
+
+  function login() {
+    document.getElementById('login').style.display = 'flex';
+  }
+
+  function closeLogin() {
+    document.getElementById('login').style.display = 'none'
+  }
+
+  function fadeOut(element, duration, finalOpacity, callback) {
+    let opacity = 1;
+
+    let elementFadingInterval = window.setInterval(function() {
+      opacity -= 100 / duration;
+
+      if (opacity <= finalOpacity) {
+        clearInterval(elementFadingInterval);
+        callback();
+      }
+
+      element.style.opacity = opacity;
+    }, 10)
+  }
+
+  function numberOnClick(event) {
+    let clicker = document.getElementById('coin');
+
+    let clickerPosition = clicker.getBoundingClientRect();
+    let position = {
+      x: Math.floor(Math.random()*170),
+      y: Math.floor(Math.random()*180)
+    }
+
+    let element = document.createElement('div');
+    element.textContent = '+' + game.coinsPerClick;
+    element.classList.add('number', 'notSelect');
+    element.style.left = position.x + 'px';
+    element.style.top = position.y + 'px';
+
+    clicker.appendChild(element);
+
+    let movementInterval = window.setInterval(function() {
+      if (typeof element == 'undefined' && element == null) clearInterval(movementInterval);
+
+      position.y--;
+      element.style.top = position.y + 'px';
+    }, 10);
+
+    fadeOut(element, 7000, 0, function(){
+      element.remove();
+    });
+  }
+
+</script>
+
+<body id="maingame">
+  <div id="login">
+    <div id="white">
+      <p id="x-login" onclick="closeLogin()">X</p>
+      <h1>Informasjon</h1>
+      <p>Denne versionen av Coin Click har ikke tillgjengelighet for bruker eller leaderboard. Progressonen din blir fortsatt lagret lokalt på enheten. Grunnen til dette er mangel på database mulighet i programmet som blir brukt til å hoste spillet på. <br><br> Takk for at du prøvde spillet vårt.</p>
+    </div>
+  </div>
+  <p id="designed">Utviklet av Adrian Gunnerod og <br>Martin Ek Brombach</p>
+  <nav>
+    <div id="nav-icons">
+      <a href="#">
+        <ion-icon name="person-circle" onclick="login()" class="stats-icon"></ion-icon>
+      </a>
+      <a href="#">
+        <ion-icon name="stats-chart" onclick="login()" class="stats-icon"></ion-icon>
+      </a>
+      <a>
+        <ion-icon name="volume-high-outline" class="stats-icon" onclick="lydswitch()" id="volume-icon"
+          style="cursor: pointer;"></ion-icon>
+      </a>
+      <p id="versionName" style="position:absolute; bottom: 10px;"></p>
+    </div>
+  </nav>
+  <div id="click-space">
+    <div id="sum">
+      <div id="sums"></div>
+    </div>
+    <div id="coin" value="0" onclick="clik(true)"></div>
+    <div id="prest">
+      <p id="prest-p" class="notSelect">Prestige</p>
+      <p id="small-text"></p>
+      <div id="pres_knapp" onclick="prestige()">Trykk for å prestige</div>
+      <progress value="0" max="500000000" id="bar"></progress>
+    </div>
+  </div>
+  <div id="upgrades">
+    <div id="upgrade-text">
+      <h2>Oppgraderinger</h2>
+    </div>
+    <p id="clickpersec">1 coins/click</p>
+    <div id="upgrades-upgrades">
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/cursor.png" alt="tim" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Auto clicker<span class="show-lvl" id="lvl0"></span></p>
+          <p id="tap0"></p>
+        </div>
+        <div class="upgrade-item-price" name="0" onclick="oppgrader(this)" id="buybg1">
+          Buy<span class="show-lvl" id="b0"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/tim.png" alt="tim" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Tim<span class="show-lvl" id="lvl1">lvl 0</span></p>
+          <p id="tap1"></p>
+        </div>
+        <div class="upgrade-item-price" name="1" onclick="oppgrader(this)" id="buybg2">
+          Buy<span class="show-lvl" id="b1"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/printer.png" alt="printer" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Printer<span class="show-lvl" id="lvl2">lvl 0</span></p>
+          <p id="tap2"></p>
+        </div>
+        <div class="upgrade-item-price" name="2" onclick="oppgrader(this)" id="buybg3">
+          Buy<span class="show-lvl" id="b2"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/magi.png" alt="magi" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Magi<span class="show-lvl" id="lvl3">lvl 0</span></p>
+          <p id="tap3"></p>
+        </div>
+        <div class="upgrade-item-price" name="3" onclick="oppgrader(this)" id="buybg4">
+          Buy<span class="show-lvl" id="b3"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/jamal.png" alt="jamal" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Jamal<span class="show-lvl" id="lvl4">lvl 0</span></p>
+          <p id="tap4"></p>
+        </div>
+        <div class="upgrade-item-price" name="4" onclick="oppgrader(this)" id="buybg5">
+          Buy<span class="show-lvl" id="b4"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/ball.png" alt="ball" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Gumball<span class="show-lvl" id="lvl5">lvl 0</span></p>
+          <p id="tap5"></p>
+        </div>
+        <div class="upgrade-item-price" name="5" onclick="oppgrader(this)" id="buybg6">
+          Buy<span class="show-lvl" id="b5"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/atm.png" alt="atm" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>ATM<span class="show-lvl" id="lvl6">lvl 0</span></p>
+          <p id="tap6"></p>
+        </div>
+        <div class="upgrade-item-price" name="6" onclick="oppgrader(this)" id="buybg7">
+          Buy<span class="show-lvl" id="b6"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/bank.png" alt="bank" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Bank<span class="show-lvl" id="lvl7">lvl 0</span></p>
+          <p id="tap7"></p>
+        </div>
+        <div class="upgrade-item-price" name="7" onclick="oppgrader(this)" id="buybg8">
+          Buy<span class="show-lvl" id="b7"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/mine.png" alt="mine" style="width: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Mine<span class="show-lvl" id="lvl8">lvl 0</span></p>
+          <p id="tap8"></p>
+        </div>
+        <div class="upgrade-item-price" name="8" onclick="oppgrader(this)" id="buybg9">
+          Buy<span class="show-lvl" id="b8"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/jamal2nd.png" alt="tim" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Jamal II<span class="show-lvl" id="lvl9">lvl 0</span></p>
+          <p id="tap9"></p>
+        </div>
+        <div class="upgrade-item-price" name="9" onclick="oppgrader(this)" id="buybg10">
+          Buy<span class="show-lvl" id="b9"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 
