@@ -201,15 +201,6 @@
     saveGame();
   }
 
-  function infipeng() {
-    // Dette er en admin kommando for å gi 499,999,999 coins
-    game.currentCoins += 1000000000; // 1B
-    document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
-    // Checks
-    prestigeCheck();
-    coinCheck();
-  }
-
   function login() {
     document.getElementById('login').style.display = 'flex';
   }
@@ -278,14 +269,14 @@
       <a href="#">
         <ion-icon name="person-circle" onclick="login()" class="stats-icon"></ion-icon>
       </a>
-      <a href="leaderboard.html">
-        <ion-icon name="stats-chart" class="stats-icon"></ion-icon>
+      <a href="#">
+        <ion-icon name="stats-chart" onclick="login()" class="stats-icon"></ion-icon>
       </a>
       <a>
         <ion-icon name="volume-high-outline" class="stats-icon" onclick="lydswitch()" id="volume-icon"
           style="cursor: pointer;"></ion-icon>
       </a>
-      <p style="position:absolute; bottom: 10px;">V.3.0</p>
+      <p style="position:absolute; bottom: 10px;">V.3.1</p>
     </div>
   </nav>
   <div id="click-space">
