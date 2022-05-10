@@ -22,7 +22,7 @@
     cpcUpgradeArray: [0, 1, 5, 10, 50, 250, 1000, 5000, 25000, 100000],
     priceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
     prestigeLevelPriceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
-    version: 3.3,
+    version: 3.4,
     prestigeLevel: 0
   };
   function saveGame() {
@@ -184,19 +184,18 @@
   function prestige() {
     // Nullstille alle verdier og øke priser og oppgraderinger
     game.currentCoins = 0;
-    game.coinsPerClick = 1;
+    game.coinsPerClick *= 1.7;
     game.autoClickTime = 500;
     game.prestigeCost *= 2.5;
     game.storeMultiplier += 0.34;
-    game.priceArray = game.prestigeLevelPriceArray;
     game.levelArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (var i = 0; i < 10; i++) {
       game.cpcUpgradeArray[i] *= 1.25;
-      game.priceArray[i] *= 1.8
+      game.prestigeLevelPriceArray[i] *= 1.8;
     }
     game.prestigeLevel++;
-    game.priceArray[0] = 10000;
-    game.prestigeLevelPriceArray = game.priceArray;
+    game.prestigeLevelPriceArrayy[0] = 10000;
+    game.priceArray = game.prestigeLevelPriceArray.slice();
     document.getElementById('bar').setAttribute('value', game.currentCoins);
     document.getElementById('bar').setAttribute('max', game.prestigeCost);
     document.getElementById('prest-p').innerHTML = 'Prestige ' + game.prestigeLevel;
