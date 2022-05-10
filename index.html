@@ -43,9 +43,9 @@
         }
       }
       game.storeMultiplier = temp.storeMultiplier;
-      game.levelArray = temp.levelArray;
-      game.priceArray = temp.priceArray;
-      game.cpcUpgradeArray = temp.cpcUpgradeArray;
+      game.levelArray = temp.levelArray.slice();
+      game.priceArray = temp.priceArray.slice();
+      game.cpcUpgradeArray = temp.cpcUpgradeArray.slice();
       game.prestigeCost = temp.prestigeCost;
    }
   }
@@ -202,7 +202,7 @@
   function prestige() {
     // Nullstille alle verdier og øke priser og oppgraderinger
     game.currentCoins = 0;
-    game.coinsPerClick *= 1.7;
+    game.coinsPerClick = 1;
     game.autoClickTime = 500;
     game.prestigeCost *= 2.5;
     game.storeMultiplier += 0.34;
