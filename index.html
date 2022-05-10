@@ -18,29 +18,43 @@
     autoClickTime: 500,
     storeMultiplier: 1.1,
     prestigeCost: 500000000,
-    levelArray: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    cpcUpgradeArray: [0, 1, 5, 10, 50, 250, 1000, 5000, 25000, 100000],
-    priceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
-    prestigeLevelPriceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000],
-    version: 3.4,
+    levelArray: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    cpcUpgradeArray: [0, 1, 5, 10, 50, 250, 1000, 5000, 25000, 100000, 250000],
+    priceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000, 170000000],
+    prestigeLevelPriceArray: [10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000, 80000000, 170000000],
+    version: 3.5,
     prestigeLevel: 0
   };
   function saveGame() {
     localStorage.setItem('gameVar', JSON.stringify(game));
   }
-  if (JSON.parse(localStorage.getItem('gameVar')) !== null){
+  if (JSON.parse(localStorage.getItem('gameVar')) !== null) {
     temp = game
     game = JSON.parse(localStorage.getItem('gameVar'));
-    if (game.version != temp.version){
-      game = temp;
-    }
+   if (game.version != temp.version) {
+      for (var i = 1; i <= game.prestigeLevel; i++) {
+        temp.prestigeCost *= 2.5;
+        temp.storeMultiplier += 0.34;
+        for (var j = 0; j < (temp.levelArray.length); j++) {
+          temp.cpcUpgradeArray[j] *= 1.25;
+          temp.priceArray[j] *= 1.8;
+          temp.prestigeLevelPriceArray[j] *= 1.8;
+          temp.levelArray[j] += game.levelArray[j];
+        }
+      }
+      game.storeMultiplier = temp.storeMultiplier;
+      game.levelArray = temp.levelArray;
+      game.priceArray = temp.priceArray;
+      game.cpcUpgradeArray = temp.cpcUpgradeArray;
+      game.prestigeCost = temp.prestigeCost;
+   }
   }
 
   window.onload = oppstart;
 
   function oppstart() {
-    document.getElementById('versionName').innerHTML= 'V ' + game.version;
-    for (var i = 1; i < 10; i++) {
+    document.getElementById('versionName').innerHTML = 'V ' + game.version;
+    for (var i = 1; i < game.levelArray.length; i++) {
       temp = 'b' + (i - 1);
       document.getElementById(temp).innerHTML = numFormatter(game.priceArray[i - 1], 1) + "$";
       temp = 'tap' + (i);
@@ -65,7 +79,7 @@
 
   function coinCheck() {
     // Endrer farge på Buy knapp for å vise om man har nok penger eller ikke
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < game.levelArray.length; i++) {
       temp = 'buybg' + (i + 1);
       if (game.priceArray[i] > game.currentCoins) {
         document.getElementById(temp).style.backgroundColor = "#da0000";
@@ -94,7 +108,7 @@
 
   function lyd_switch_on_or_of() {
     // Denne funksjonen skal man lime inn for å sjekke om soundCheck er på eller ikke.
-    if (soundCheck) {
+    if (game.soundCheck) {
       return true;
     } else {
       return false;
@@ -103,12 +117,12 @@
 
   function lydswitch() {
     // Lydswitch
-    if (soundCheck) {
+    if (game.soundCheck) {
       document.getElementById('volume-icon').name = "volume-mute-outline"
-      soundCheck = false;
+      game.soundCheck = false;
     } else {
       document.getElementById('volume-icon').name = "volume-high-outline"
-      soundCheck = true
+      game.soundCheck = true
     }
   }
 
@@ -124,48 +138,52 @@
     document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
     prestigeCheck();
     coinCheck();
-    if (event == !undefined){
-      if(document.getElementById("coin").childElementCount <=30){
-      numberOnClick(event);
-    }}
+    if (event == !undefined) {
+      if (document.getElementById("coin").childElementCount <= 30) {
+        numberOnClick(event);
+      }
+    }
     saveGame();
   }
 
   function oppgrader(elementpressed) {
     // Hodterer oppgraderinger
     var elementPressed = parseInt(elementpressed.getAttribute("name"));
-    if (game.currentCoins >= game.priceArray[elementPressed]) {
-      // Oppdatere coinsPerClick display
-      game.coinsPerClick += game.cpcUpgradeArray[elementPressed];
-      document.getElementById("clickpersec").innerHTML = numFormatter(game.coinsPerClick, 1) + " coins/click";
-      // Oppdatere intern megde per klikk og mengde penger
-      game.currentCoins -= game.priceArray[elementPressed];
-      document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
-      // Oppdatere pris
-      game.priceArray[elementPressed] *= game.storeMultiplier;
-      temp = 'b' + (elementPressed);
-      document.getElementById(temp).innerHTML = numFormatter(game.priceArray[elementPressed], 1) + "$";
-      // Oppdatere levels
-      game.levelArray[elementPressed]++
-      temp = 'lvl' + (elementPressed);
-      document.getElementById(temp).innerHTML = "lvl " + numFormatter(game.levelArray[elementPressed]);
-      // Checks
-      prestigeCheck();
-      coinCheck();
-      if (elementPressed == 0) {
-        document.getElementById("buybg1").style.display = "none";
-        document.getElementById("lvl0").innerHTML = "Purchased";
-        document.getElementById("lvl0").style.textAlign = "center";
-        autoclick();
-      }
-      if (game.autoClickTime > 1) {
-        game.autoClickTime--
-        if (game.levelArray[0] == 1) {
+    uppgradeAction()
+    function uppgradeAction() {
+      if (game.currentCoins >= game.priceArray[elementPressed]) {
+        // Oppdatere coinsPerClick display
+        game.coinsPerClick += game.cpcUpgradeArray[elementPressed];
+        document.getElementById("clickpersec").innerHTML = numFormatter(game.coinsPerClick, 1) + " coins/click";
+        // Oppdatere intern megde per klikk og mengde penger
+        game.currentCoins -= game.priceArray[elementPressed];
+        document.getElementById("sums").innerHTML = numFormatter(game.currentCoins, 2) + '$';
+        // Oppdatere pris
+        game.priceArray[elementPressed] *= game.storeMultiplier;
+        temp = 'b' + (elementPressed);
+        document.getElementById(temp).innerHTML = numFormatter(game.priceArray[elementPressed], 1) + "$";
+        // Oppdatere levels
+        game.levelArray[elementPressed]++
+        temp = 'lvl' + (elementPressed);
+        document.getElementById(temp).innerHTML = "lvl " + numFormatter(game.levelArray[elementPressed]);
+        // Checks
+        prestigeCheck();
+        coinCheck();
+        if (elementPressed == 0) {
+          document.getElementById("buybg1").style.display = "none";
+          document.getElementById("lvl0").innerHTML = "Purchased";
+          document.getElementById("lvl0").style.textAlign = "center";
           autoclick();
         }
+        if (game.autoClickTime > 1) {
+          game.autoClickTime--
+          if (game.levelArray[0] == 1) {
+            autoclick();
+          } 1
+        }
       }
+      saveGame();
     }
-    saveGame();
   }
 
   function prestigeCheck() {
@@ -188,13 +206,13 @@
     game.autoClickTime = 500;
     game.prestigeCost *= 2.5;
     game.storeMultiplier += 0.34;
-    game.levelArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i < 10; i++) {
+    game.levelArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (var i = 0; i < game.levelArray.length; i++) {
       game.cpcUpgradeArray[i] *= 1.25;
       game.prestigeLevelPriceArray[i] *= 1.8;
     }
     game.prestigeLevel++;
-    game.prestigeLevelPriceArrayy[0] = 10000;
+    game.prestigeLevelPriceArray[0] = 10000;
     game.priceArray = game.prestigeLevelPriceArray.slice();
     document.getElementById('bar').setAttribute('value', game.currentCoins);
     document.getElementById('bar').setAttribute('max', game.prestigeCost);
@@ -225,7 +243,7 @@
   function fadeOut(element, duration, finalOpacity, callback) {
     let opacity = 1;
 
-    let elementFadingInterval = window.setInterval(function() {
+    let elementFadingInterval = window.setInterval(function () {
       opacity -= 100 / duration;
 
       if (opacity <= finalOpacity) {
@@ -242,8 +260,8 @@
 
     let clickerPosition = clicker.getBoundingClientRect();
     let position = {
-      x: Math.floor(Math.random()*170),
-      y: Math.floor(Math.random()*180)
+      x: Math.floor(Math.random() * 170),
+      y: Math.floor(Math.random() * 180)
     }
 
     let element = document.createElement('div');
@@ -254,14 +272,14 @@
 
     clicker.appendChild(element);
 
-    let movementInterval = window.setInterval(function() {
+    let movementInterval = window.setInterval(function () {
       if (typeof element == 'undefined' && element == null) clearInterval(movementInterval);
 
       position.y--;
       element.style.top = position.y + 'px';
     }, 10);
 
-    fadeOut(element, 7000, 0, function(){
+    fadeOut(element, 7000, 0, function () {
       element.remove();
     });
   }
@@ -273,7 +291,9 @@
     <div id="white">
       <p id="x-login" onclick="closeLogin()">X</p>
       <h1>Informasjon</h1>
-      <p>Denne versionen av Coin Click har ikke tillgjengelighet for bruker eller leaderboard. Progressonen din blir fortsatt lagret lokalt på enheten. Grunnen til dette er mangel på database mulighet i programmet som blir brukt til å hoste spillet på. <br><br> Takk for at du prøvde spillet vårt.</p>
+      <p>Denne versionen av Coin Click har ikke tillgjengelighet for bruker eller leaderboard. Progressonen din blir
+        fortsatt lagret lokalt på enheten. Grunnen til dette er mangel på database mulighet i programmet som blir brukt
+        til å hoste spillet på. <br><br> Takk for at du prøvde spillet vårt.</p>
     </div>
   </div>
   <p id="designed">Utviklet av Adrian Gunnerod og <br>Martin Ek Brombach</p>
@@ -428,6 +448,18 @@
         </div>
         <div class="upgrade-item-price" name="9" onclick="oppgrader(this)" id="buybg10">
           Buy<span class="show-lvl" id="b9"></span>
+        </div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-item-icon">
+          <img src="icons/marquis.png" alt="tim" style="height: 70px" />
+        </div>
+        <div class="upgrade-item-amount">
+          <p>Marquis<span class="show-lvl" id="lvl10">lvl 0</span></p>
+          <p id="tap10"></p>
+        </div>
+        <div class="upgrade-item-price" name="10" onclick="oppgrader(this)" id="buybg11">
+          Buy<span class="show-lvl" id="b10"></span>
         </div>
       </div>
     </div>
