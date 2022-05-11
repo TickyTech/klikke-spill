@@ -70,6 +70,11 @@
     window.onload = oppstart;
 
     function oppstart() {
+      oppgraderMengde(document.getElementById('uppgradeAmountNr1'));
+      if (game.version != temp.version) {
+      game.version = temp.version;
+      newUpdate();
+      }
       document.getElementById("versionName").innerHTML = "V " + game.version;
       for (var i = 0; i < game.levelArray.length; i++) {
         temp = "b" + (i);
@@ -99,8 +104,6 @@
         document.getElementById("lvl0").style.textAlign = "center";
         autoclick();
       }
-      oppgraderMengde(document.getElementById('uppgradeAmountNr1'));
-      newUpdate();
     }
 
     function coinCheck() {
