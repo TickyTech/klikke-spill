@@ -12,22 +12,6 @@
     justify-content: center;
     align-items: center;
 }
-::-webkit-scrollbar {
-    width: 0.75em;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: rgb(84, 45, 30);
-    border-radius: 100vw;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(94, 51, 20);
-    border: none;
-  }
   nav {
     background-color: #343a40;
     color: #fff;
@@ -168,6 +152,38 @@
     padding: 30px;
     color:rgba(238, 230, 221, 0.932);
 }
+#upgrades-upgrades::-webkit-scrollbar {
+width: 0.75em;
+}
+
+#upgrades-upgrades::-webkit-scrollbar-track {
+background-color: rgba(0, 0, 0, 0);
+}
+
+#upgrades-upgrades::-webkit-scrollbar-thumb {
+background: rgb(84, 45, 30);
+border-radius: 100vw;
+}
+#upgrades-upgrades::-webkit-scrollbar-thumb:hover {
+background: rgb(94, 51, 20);
+border: none;
+}
+
+#uppdatewhite::-webkit-scrollbar {
+width: 0.5em;
+}
+
+#uppdatewhite::-webkit-scrollbar-track {
+background-color: rgba(0, 0, 0, 0);
+}
+
+#uppdatewhite::-webkit-scrollbar-thumb {
+background: rgb(62, 69, 83);
+}
+#uppdatewhite::-webkit-scrollbar-thumb:hover {
+background: rgb(76, 84, 102);
+border: none;
+}
 #upgrade-text{
     height: 15%;
     width: 100%;
@@ -241,7 +257,20 @@
 #clickpersec, #coinpersec{
     margin-left: 10px;
 }
-
+#upgradeAmount{
+    display: flex;
+    justify-content: right;
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+#upgradeAmount div{
+    text-align: center;
+    background-color: rgb(97, 172, 97);
+    border-radius: 5px;
+    margin-inline: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
 
 #designed{
     position: fixed;
@@ -277,15 +306,58 @@
     text-align: center;
     margin-bottom: 20px;
 }
-#x-login{
+#x-btn{
     position: absolute;
     top:10px;
     right:15px;
     cursor: pointer;
+    font-size: 40px;
 }
 
 .active{
     display: block;
+}
+
+#uppdateDiv{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.704);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#uppdatewhite{
+    background-color: rgb(38, 43, 53);
+    color: rgb(240, 240, 240);
+    height: 80vh;
+    max-width:600px;
+    min-width: 290px;
+    margin: 9px;
+    padding: 20px;
+    font-size: 23px;
+    position: relative;
+    border: 5px solid rgb(82, 82, 82);
+    box-shadow: 0px 5px 5px black;
+    overflow-y: scroll;
+}
+
+#uppdate-header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#update-list-item{
+    display: list-item;
+    margin-left: 25px;
+    margin-top: 7px;
+    font-size: 20px;
+}
+
+#uppdatewhite h2{
+    margin-top: 30px;
 }
 
 
