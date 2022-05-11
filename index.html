@@ -71,7 +71,12 @@
 
     function oppstart() {
       oppgraderMengde(document.getElementById('uppgradeAmountNr1'));
+      if (JSON.parse(localStorage.getItem("gameVar")) !== null) {
+      if (game.version != temp.version) {
       newUpdate();
+        game.version = temp.version;
+      }
+      }
       document.getElementById("versionName").innerHTML = "V " + game.version;
       for (var i = 0; i < game.levelArray.length; i++) {
         temp = "b" + (i);
