@@ -29,15 +29,16 @@
         10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000,
         80000000, 170000000,
       ],
-      version: 3.6,
+      version: 3.7,
       prestigeLevel: 0,
     };
     function saveGame() {
       localStorage.setItem("gameVar", JSON.stringify(game));
+      document.getElementById("testpet").innerHTML = JSON.stringify(game);
     }
-    
+
     window.onload = oppstart;
-    
+
     function oppstart() {
       if (JSON.parse(localStorage.getItem("gameVar")) !== null) {
         temp = game;
@@ -59,7 +60,7 @@
               temp.prestigeLevelPriceArray[i] *= temp.storeMultiplier;
             }
           }
-  
+
           game.version = temp.version;
           game.storeMultiplier = temp.storeMultiplier;
           game.levelArray = temp.levelArray.slice();
@@ -68,12 +69,12 @@
           game.prestigeCost = temp.prestigeCost;
           game.priceArray[0] = 10000;
           game.prestigeLevelPriceArray[0] = 10000;
-          newUpdate()
+          newUpdate();
         }
       }
       document.getElementById("versionName").innerHTML = "V " + game.version;
       for (var i = 0; i < game.levelArray.length; i++) {
-        temp = "b" + (i);
+        temp = "b" + i;
         document.getElementById(temp).innerHTML =
           numFormatter(game.priceArray[i], 1) + "$";
         temp = "tap" + i;
@@ -83,8 +84,8 @@
         document.getElementById(temp).innerHTML =
           "lvl " + numFormatter(game.levelArray[i]);
       }
-      document.getElementById('lvl0').style.display='none';
-      document.getElementById('tap0').style.display='none';
+      document.getElementById("lvl0").style.display = "none";
+      document.getElementById("tap0").style.display = "none";
       coinCheck();
       document.getElementById("clickpersec").innerHTML =
         numFormatter(game.coinsPerClick, 1) + " coins/click";
@@ -100,7 +101,7 @@
         document.getElementById("lvl0").style.textAlign = "center";
         autoclick();
       }
-      oppgraderMengde(document.getElementById('uppgradeAmountNr1'));
+      oppgraderMengde(document.getElementById("uppgradeAmountNr1"));
     }
 
     function coinCheck() {
@@ -177,25 +178,30 @@
       if (elementPressedt != 27) {
         temp = parseInt(elementPressedt.getAttribute("name"));
       }
-      if (temp == 1 && elementPressedt != 27){
-        upgAmount = 1
+      if (temp == 1 && elementPressedt != 27) {
+        upgAmount = 1;
         elementPressedt.style.backgroundColor = "rgb(96, 221, 96)";
-        document.getElementById('uppgradeAmountNr2').style.backgroundColor = "rgb(97, 172, 97)";
-        document.getElementById('uppgradeAmountNr3').style.backgroundColor = "rgb(97, 172, 97)";
-      } else if (temp == 2 && elementPressedt != 27){
-        upgAmount = 10
-        document.getElementById('uppgradeAmountNr1').style.backgroundColor = "rgb(97, 172, 97)";
+        document.getElementById("uppgradeAmountNr2").style.backgroundColor =
+          "rgb(97, 172, 97)";
+        document.getElementById("uppgradeAmountNr3").style.backgroundColor =
+          "rgb(97, 172, 97)";
+      } else if (temp == 2 && elementPressedt != 27) {
+        upgAmount = 10;
+        document.getElementById("uppgradeAmountNr1").style.backgroundColor =
+          "rgb(97, 172, 97)";
         elementPressedt.style.backgroundColor = "rgb(96, 221, 96)";
-        document.getElementById('uppgradeAmountNr3').style.backgroundColor = "rgb(97, 172, 97)";
-      } else if (temp == 3 && elementPressedt != 27){
-        upgAmount = 1000
-        document.getElementById('uppgradeAmountNr1').style.backgroundColor = "rgb(97, 172, 97)";
-        document.getElementById('uppgradeAmountNr2').style.backgroundColor = "rgb(97, 172, 97)";
+        document.getElementById("uppgradeAmountNr3").style.backgroundColor =
+          "rgb(97, 172, 97)";
+      } else if (temp == 3 && elementPressedt != 27) {
+        upgAmount = 1000;
+        document.getElementById("uppgradeAmountNr1").style.backgroundColor =
+          "rgb(97, 172, 97)";
+        document.getElementById("uppgradeAmountNr2").style.backgroundColor =
+          "rgb(97, 172, 97)";
         elementPressedt.style.backgroundColor = "rgb(96, 221, 96)";
-      } else if (elementPressedt == 27){
+      } else if (elementPressedt == 27) {
         return upgAmount;
       }
-      
     }
 
     function oppgrader(elementpressed) {
@@ -284,11 +290,11 @@
       document.getElementById("lvl0").innerHTML = "";
       document.getElementById("lvl0").style.textAlign = "center";
       document.getElementById("b0").innerHTML = "10k$";
-      oppstart();
+      saveGame();
       clearInterval(myInterval);
       coinCheck();
       prestigeCheck();
-      saveGame();
+      oppstart();
     }
 
     function login() {
@@ -300,8 +306,9 @@
     }
 
     function newUpdate() {
+      document.getElementById("uppdate-header").innerHTML =
+        "Oppdatering V " + game.version;
       document.getElementById("uppdateDiv").style.display = "flex";
-      document.getElementById('uppdate-header').innerHTML = 'Oppdatering V ' + game.version;
     }
 
     function closeUpdate() {
@@ -355,6 +362,9 @@
   </script>
 
   <body id="maingame">
+    <p id="phpsavegame">false</p>
+    <p id="phplogin">false</p>
+    <p id="testpet"></p>
     <div id="login">
       <div id="white">
         <p id="x-login" onclick="closeLogin()">X</p>
@@ -373,20 +383,39 @@
         <p id="x-btn" onclick="closeUpdate()">X</p>
         <h1 id="uppdate-header">Oppdatering</h1>
         <p>
-          Beside the new purchasing possibilities this update mainly focuses on bugfixing and making it easier to add more upgrades in the future. 
-          During the last cupple of updates the code behind the scene has changed drasticly. With this change we hope to be able to add more upgrades
-          for those who are furter into the game.
+          Beside the new purchasing possibilities this update mainly focuses on
+          bugfixing and making it easier to add more upgrades in the future.
+          During the last cupple of updates the code behind the scene has
+          changed drasticly. With this change we hope to be able to add more
+          upgrades for those who are furter into the game.
         </p>
-        <h2>New features</h2>
-        <p id="update-list-item">Added possibility to upgrade 1, 10 and max at a time.</p>
-        <p id="update-list-item">Added new screen when a new update happends. (This screen)</p>
-        <p id="update-list-item">Added Marquis, a new upgrade with a temporary icon and image.</p>
+        <!-- <h2>New features</h2>
+        <p id="update-list-item">
+          Added possibility to upgrade 1, 10 and max at a time.
+        </p>
+        <p id="update-list-item">
+          Added new screen when a new update happends. (This screen)
+        </p>
+        <p id="update-list-item">
+          Added Marquis, a new upgrade with a temporary icon and image.
+        </p> -->
         <h2>Bugfixes</h2>
-        <p id="update-list-item">Fixed bug where Marquis buy price would not correctly format.</p>
-        <p id="update-list-item">Numbers that pop upp when pressing coin now correctly formats with k, m etc.</p>
-        <p id="update-list-item">Prestige bar now correcly uppdates the value you need for next prestige.</p>
-        <p style="margin-top:30px;">Going forward we want to make a leaderboard to the game, and we want to make an official ending. But this is suspect to change. With this in mind
-          the next update will not happend for a cupple of weeks. (Besides bugfixes) With that beeing said, we hope you enjoy our game. And keep on clicking.</p>
+        <p id="update-list-item">Fixed bug where you were unable to prestige</p>
+        <!-- <p id="update-list-item">
+          Numbers that pop upp when pressing coin now correctly formats with k,
+          m etc.
+        </p>
+        <p id="update-list-item">
+          Prestige bar now correcly uppdates the value you need for next
+          prestige.
+        </p> -->
+        <p style="margin-top: 30px">
+          Going forward we want to make a leaderboard to the game, and we want
+          to make an official ending. But this is suspect to change. With this
+          in mind the next update will not happend for a cupple of weeks.
+          (Besides bugfixes) With that beeing said, we hope you enjoy our game.
+          And keep on clicking.
+        </p>
       </div>
     </div>
     <p id="designed">Utviklet av Adrian Gunnerod og <br />Martin Ek Brombach</p>
@@ -436,9 +465,15 @@
       </div>
       <p id="clickpersec">1 coins/click</p>
       <div id="upgradeAmount">
-        <div id="uppgradeAmountNr1" name="1" onclick="oppgraderMengde(this)">1x</div>
-        <div id="uppgradeAmountNr2" name="2" onclick="oppgraderMengde(this)">10x</div>
-        <div id="uppgradeAmountNr3" name="3" onclick="oppgraderMengde(this)">MAX</div>
+        <div id="uppgradeAmountNr1" name="1" onclick="oppgraderMengde(this)">
+          1x
+        </div>
+        <div id="uppgradeAmountNr2" name="2" onclick="oppgraderMengde(this)">
+          10x
+        </div>
+        <div id="uppgradeAmountNr3" name="3" onclick="oppgraderMengde(this)">
+          MAX
+        </div>
       </div>
       <div id="upgrades-upgrades">
         <div class="upgrade-item">
