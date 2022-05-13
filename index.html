@@ -29,7 +29,7 @@
         10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000,
         80000000, 170000000,
       ],
-      version: 3.7,
+      version: "3.7.2",
       prestigeLevel: 0,
     };
     function saveGame() {
@@ -101,6 +101,8 @@
         autoclick();
       }
       oppgraderMengde(document.getElementById("uppgradeAmountNr1"));
+      temp = document.getElementById("refreshProtection");
+      temp.parentNode.removeChild(temp);
     }
 
     function coinCheck() {
@@ -361,6 +363,18 @@
   </script>
 
   <body id="maingame">
+    <div
+      id="refreshProtection"
+      style="
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        user-select: none;
+      "
+    ></div>
     <div id="login">
       <div id="white">
         <p id="x-login" onclick="closeLogin()">X</p>
@@ -378,33 +392,32 @@
       <div id="uppdatewhite">
         <p id="x-btn" onclick="closeUpdate()">X</p>
         <h1 id="uppdate-header">Oppdatering</h1>
-        <p>
+        <!-- <h2>New features</h2>
+          <p id="update-list-item">
+            Added possibility to upgrade 1, 10 and max at a time.
+          </p>
+          <p id="update-list-item">
+            Added new screen when a new update happends. (This screen)
+          </p>
+          <p id="update-list-item">
+            Added Marquis, a new upgrade with a temporary icon and image.
+          </p> -->
+        <h2>Bugfixes</h2>
+        <p id="update-list-item">
+          You now longer loose your progress if you click while refreshing.
+        </p>
+        <!-- <p id="update-list-item">Fixed bug where you were unable to prestige</p>
+        <p id="update-list-item">
+          Prestige bar now correcly uppdates the value you need for next
+          prestige.
+        </p> -->
+        <p style="margin-top: 30px">
           Beside the new purchasing possibilities this update mainly focuses on
           bugfixing and making it easier to add more upgrades in the future.
           During the last cupple of updates the code behind the scene has
           changed drasticly. With this change we hope to be able to add more
           upgrades for those who are furter into the game.
         </p>
-        <!-- <h2>New features</h2>
-        <p id="update-list-item">
-          Added possibility to upgrade 1, 10 and max at a time.
-        </p>
-        <p id="update-list-item">
-          Added new screen when a new update happends. (This screen)
-        </p>
-        <p id="update-list-item">
-          Added Marquis, a new upgrade with a temporary icon and image.
-        </p> -->
-        <h2>Bugfixes</h2>
-        <p id="update-list-item">Fixed bug where you were unable to prestige</p>
-        <!-- <p id="update-list-item">
-          Numbers that pop upp when pressing coin now correctly formats with k,
-          m etc.
-        </p>
-        <p id="update-list-item">
-          Prestige bar now correcly uppdates the value you need for next
-          prestige.
-        </p> -->
         <p style="margin-top: 30px">
           Going forward we want to make a leaderboard to the game, and we want
           to make an official ending. But this is suspect to change. With this
@@ -414,7 +427,7 @@
         </p>
       </div>
     </div>
-    <p id="designed">Utviklet av Adrian Gunnerod og <br />Martin Ek Brombach</p>
+    <p id="designed">Utviklet av Adrian Gunnerød og <br />Martin Ek Brombach</p>
     <nav>
       <div id="nav-icons">
         <a href="#">
