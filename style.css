@@ -294,7 +294,7 @@ border: none;
     nav {
         position: absolute;
         left:0;
-        padding-inline: 5px;
+        padding-inline: 0;
         width:max-content;
     }
     #shopIcon{
