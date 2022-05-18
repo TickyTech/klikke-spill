@@ -5,6 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon_io/site.webmanifest" />
     <title>Coin Click</title>
   </head>
   <script>
@@ -29,7 +47,7 @@
         10000, 10, 100, 1500, 30000, 150000, 600000, 1500000, 10000000,
         80000000, 170000000,
       ],
-      version: "3.7.2",
+      version: "3.8",
       prestigeLevel: 0,
     };
     function saveGame() {
@@ -360,6 +378,16 @@
         element.remove();
       });
     }
+    var shopActive = true;
+    function shopOnMobile() {
+      if (shopActive) {
+        document.getElementById("upgrades").classList.add("active");
+        shopActive = false;
+      } else {
+        document.getElementById("upgrades").classList.remove("active");
+        shopActive = true;
+      }
+    }
   </script>
 
   <body id="maingame">
@@ -392,42 +420,34 @@
       <div id="uppdatewhite">
         <p id="x-btn" onclick="closeUpdate()">X</p>
         <h1 id="uppdate-header">Oppdatering</h1>
-        <!-- <h2>New features</h2>
-          <p id="update-list-item">
-            Added possibility to upgrade 1, 10 and max at a time.
-          </p>
-          <p id="update-list-item">
-            Added new screen when a new update happends. (This screen)
-          </p>
-          <p id="update-list-item">
+        <p style="margin-top: 30px">
+          New update! Yay. Nothing special about this update. Only fixing some
+          stuff we have wantet to fix for a while.
+        </p>
+        <h2>New features</h2>
+        <p id="update-list-item">
+          You are now able to play on almost all screen sizes. (Still a bit bad
+          looking on mobile).
+        </p>
+        <p id="update-list-item">Added favicon.</p>
+        <!-- <p id="update-list-item">
             Added Marquis, a new upgrade with a temporary icon and image.
           </p> -->
         <h2>Bugfixes</h2>
-        <p id="update-list-item">
-          You now longer loose your progress if you click while refreshing.
-        </p>
+        <p id="update-list-item">Changed Marquise to gambling.</p>
         <!-- <p id="update-list-item">Fixed bug where you were unable to prestige</p>
         <p id="update-list-item">
           Prestige bar now correcly uppdates the value you need for next
           prestige.
         </p> -->
         <p style="margin-top: 30px">
-          Beside the new purchasing possibilities this update mainly focuses on
-          bugfixing and making it easier to add more upgrades in the future.
-          During the last cupple of updates the code behind the scene has
-          changed drasticly. With this change we hope to be able to add more
-          upgrades for those who are furter into the game.
-        </p>
-        <p style="margin-top: 30px">
-          Going forward we want to make a leaderboard to the game, and we want
-          to make an official ending. But this is suspect to change. With this
-          in mind the next update will not happend for a cupple of weeks.
-          (Besides bugfixes) With that beeing said, we hope you enjoy our game.
-          And keep on clicking.
+          If you hva tested the game on mobile you can see it is not perfect.
+          But it works. We will be continuing making the mobile experience
+          better.
         </p>
       </div>
     </div>
-    <p id="designed">Utviklet av Adrian Gunnerød og <br />Martin Ek Brombach</p>
+    <!-- <p id="designed">Utviklet av Adrian Gunnerød og <br />Martin Ek Brombach</p> -->
     <nav>
       <div id="nav-icons">
         <a href="#">
@@ -453,6 +473,15 @@
             style="cursor: pointer"
           ></ion-icon>
         </a>
+        <a>
+          <ion-icon
+            name="storefront-outline"
+            class="stats-icon"
+            onclick="shopOnMobile()"
+            id="shopIcon"
+            style="cursor: pointer"
+          ></ion-icon>
+        </a>
         <p id="versionName" style="position: absolute; bottom: 10px"></p>
       </div>
     </nav>
@@ -468,7 +497,7 @@
         <progress value="0" max="500000000" id="bar"></progress>
       </div>
     </div>
-    <div id="upgrades">
+    <div id="upgrades" class="">
       <div id="upgrade-text">
         <h2>Oppgraderinger</h2>
       </div>
@@ -657,10 +686,10 @@
         </div>
         <div class="upgrade-item">
           <div class="upgrade-item-icon">
-            <img src="icons/marquis.png" alt="tim" style="height: 70px" />
+            <img src="icons/slot.png" alt="tim" style="height: 70px" />
           </div>
           <div class="upgrade-item-amount">
-            <p>Marquis<span class="show-lvl" id="lvl10">lvl 0</span></p>
+            <p>Gamble<span class="show-lvl" id="lvl10">lvl 0</span></p>
             <p id="tap10"></p>
           </div>
           <div

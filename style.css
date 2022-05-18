@@ -12,6 +12,11 @@
     justify-content: center;
     align-items: center;
 }
+
+#testpet, #phpsavegame, #phplogin{
+    display: none;
+}
+
   nav {
     background-color: #343a40;
     color: #fff;
@@ -151,6 +156,7 @@
     background-repeat: no-repeat, no-repeat, repeat;
     padding: 30px;
     color:rgba(238, 230, 221, 0.932);
+    transition: 1s all;
 }
 #upgrades-upgrades::-webkit-scrollbar {
 width: 0.75em;
@@ -252,6 +258,124 @@ border: none;
     font-size: 20px;
     display: block;
     margin-left: 5px;
+}
+
+#shopIcon{
+    display: none;
+}
+
+.active{
+    top:2vh!important;
+}
+
+@media (max-width:1320px){
+    .upgrade-item-amount{
+        font-size: 30px;
+    }
+}
+@media (max-width:1123px){
+    .show-lvl{
+        font-size: 15px;
+    }
+    .upgrade-item-price{
+        width: 70px;
+        font-size: 1.4rem;
+    }
+}
+@media (max-width:973px){
+    #maingame{
+        margin-left: 60px;
+    }
+    #upgrades{
+        position: absolute;
+        top: -100vh;
+        max-width:80vw;
+    }
+    nav {
+        position: absolute;
+        left:0;
+        padding-inline: 5px;
+        width:max-content;
+    }
+    #shopIcon{
+        display: block;
+    }
+}
+@media (max-width:595px){
+    .upgrade-item-amount{
+        font-size: 23px;
+    }
+    #upgrades{
+        max-width:380px;
+    }
+    .upgrade-item-icon{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media (max-width:522px){
+    #maingame{
+        margin-left: 0px;
+        overflow: hidden;
+    }
+    #prest{
+        bottom: 60px;
+    }
+    #upgrades{
+        max-width:120vw;
+        padding: 0px;
+    }
+    #upgradeAmount{
+        justify-content: center!important;
+        margin-top: 0!important;
+    }
+    #upgradeAmountNr1{
+        padding:5px 10px;
+    }
+    #upgrades-upgrades{
+        margin-inline: auto;
+        max-width: 320px;
+    }
+    #clickpersec{
+        text-align: center;
+    }
+    .upgrade-item-price{
+        width: 60px;
+        font-size: 1.2rem;
+    }
+    .upgrade-item-amount{
+        font-size: 18px;
+    }
+    .upgrade-item-icon{
+        height: 40px;
+        width: 40px;
+    }
+    nav {
+        height: 6vh;
+        width:100%;
+        display: flex;
+        align-items: left;
+        flex-direction: row;
+        z-index: 10;
+        bottom: 0;
+      }
+      #nav-icons{
+          flex-direction: row;
+          margin-top: 0;
+      }
+      #nav-icons a{
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      #nav-icons p{
+        position: absolute;
+        bottom:10px;
+        right: 20px;
+      }
+      .stats-icon{
+          margin-bottom: 0;
+      }
 }
 
 #clickpersec, #coinpersec{
