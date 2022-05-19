@@ -315,6 +315,9 @@ border: none;
 }
 
 @media (max-width:522px){
+    #upgrades-upgrades::-webkit-scrollbar {
+        width: 0;
+        }
     #maingame{
         margin-left: 0px;
         overflow: hidden;
@@ -323,12 +326,15 @@ border: none;
         bottom: 60px;
     }
     #upgrades{
-        max-width:120vw;
         padding: 0px;
+        overflow: hidden;
     }
     #upgradeAmount{
         justify-content: center!important;
         margin-top: 0!important;
+    }
+    #upgrade-text{
+        font-size: 1.25em;
     }
     #upgradeAmountNr1{
         padding:5px 10px;
@@ -336,6 +342,7 @@ border: none;
     #upgrades-upgrades{
         margin-inline: auto;
         max-width: 320px;
+        height: 68%;
     }
     #clickpersec{
         text-align: center;
