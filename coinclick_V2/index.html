@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon_io/site.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Click</title>
+  </head>
+
+  <body>
+    <div id="refreshProtection"></div>
+    <div id="gameArea">
+      <section id="section1">
+        <div id="navBar">
+          <a href="#">
+            <ion-icon
+              name="person-circle"
+              onclick="login()"
+              class="navIcon"
+            ></ion-icon>
+          </a>
+          <a href="#">
+            <ion-icon
+              name="stats-chart"
+              onclick="adminCode()"
+              class="navIcon"
+            ></ion-icon>
+          </a>
+          <a>
+            <ion-icon
+              name="volume-high-outline"
+              class="navIcon"
+              onclick="lydswitch()"
+              id="volume-icon"
+              style="cursor: pointer"
+            ></ion-icon>
+          </a>
+          <a>
+            <ion-icon
+              name="storefront-outline"
+              class="navIcon"
+              onclick="shopOnMobile()"
+              id="shopIcon"
+              style="cursor: pointer; margin-right: 0"
+            ></ion-icon>
+          </a>
+        </div>
+        <div id="version">Alpha<br />V 3.8</div>
+      </section>
+      <section id="section2">
+        <div>
+          <div id="cashArea">
+            <p id="cash">100$</p>
+            <p id="coinsPerClick">10 coins/click</p>
+          </div>
+        </div>
+        <div id="coinArea"><img src="icons/coin.png" alt="Coin" /></div>
+        <div>
+          <div id="prestigeArea">
+            <p>PRESTIGE</p>
+            <p id="platCookies">+000,000,000,000</p>
+            <progress value="250000000" max="500000000" id="bar"></progress>
+          </div>
+        </div>
+      </section>
+      <section id="section3">
+        <div id="uppgradeArea">
+          <div id="uppgradeArea2">
+            <p id="uppgradeText">Uppgrades</p>
+            <div id="uppgradeTimes">
+              <div>1x</div>
+              <div>10x</div>
+              <div>100x</div>
+            </div>
+            <div id="uppgradesHousing">
+              <div class="uppgradeDiv">
+                <div>
+                  <div class="iconDiv">
+                    <img
+                      class="uppgradeIcon"
+                      src="icons/cursor.png"
+                      alt="Clicker"
+                    />
+                  </div>
+                  <div>
+                    <p class="uppgradeName">Autoclicker</p>
+                  </div>
+                </div>
+                <div class="uppgradeRight">
+                  <p class="uppgradeTaps"></p>
+                  <div class="uppgradeButton">
+                    <p class="uppgradeBuy">Buy</p>
+                    <p class="uppgradeBuyPrice">10.0k$</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
